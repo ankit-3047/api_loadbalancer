@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model PrepaidVouchers {
+  id            Int      @id @default(autoincrement())
+  voucherCode   String   @unique
+  amount        Float
+  expirationDate DateTime
+  status        String   // e.g., "active", "used", "expired"
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
